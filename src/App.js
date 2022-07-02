@@ -6,7 +6,6 @@ import {faChevronRight, faChevronLeft, faCircle, faCheckCircle, faPlus} from '@f
 import List from "./components/List";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import data from './data';
 import Product from "./components/Product";
 import Cart from "./components/Cart";
 import About from "./components/About";
@@ -48,7 +47,7 @@ function App(item, items) {
             <List/>
 
         </div>
-
+        <Footer/>
     </div>
 )
     ;
