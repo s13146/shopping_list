@@ -25,13 +25,23 @@ export default function Cart({cart, setCart}) {
             cart.filter((product) => product !== productToRemove)
         );
     };
+
     function sortByQuantity() {
         cart.sort((a, b) => (a.quantity > b.quantity ? 1 : -1));
         setCart([...cart]);
     }
 
+    function sortByTitle() {
+        cart.sort((a, b) => (a.name > b.name ? 1 : -1));
+        setCart([...cart]);
 
+    }
 
+    function sortByPrice() {
+        cart.sort((a, b) => (a.cost > b.cost ? 1 : -1));
+        setCart([...cart]);
+
+    }
     return (
         <>
             <div className='app-background'>
@@ -39,26 +49,28 @@ export default function Cart({cart, setCart}) {
                     <h2>Wybrane produkty</h2>
                     <div className="item-list">
                         <button className="button-white" onClick={() => sortByQuantity()}>Sortuj według ilości</button>
+                        <button className="button-white " onClick={() => sortByPrice()}>Sortuj według ceny</button>
+                        <button className="button-white " onClick={() => sortByTitle()}>Sortuj alfabetycznie</button>
                         <button className="button-white" onClick={() => clearCart()}>Wyczyść koszyk</button>
 
                         <div className='item-container'> Wartość produktów: {getTotalSum()} zł</div>
 
                         {cart.map((product, idx) => (
-                            <div className="product-cart" key={idx} >
+                            <div className="product-cart" key={idx}>
                                 <h3>{product.name}</h3>
                                 <h4>Cena: {product.cost} zł</h4>
                                 <h4>Zmień ilość</h4>
 
                                 <div className='add-item-box'>
-                                <input className= 'add-item-input'
-                                    value={product.quantity}
-                                    onChange={(e) =>
-                                        setQuantity(
-                                            product,
-                                            parseInt(e.target.value)
-                                        )
-                                    }
-                                />
+                                    <input className='add-item-input'
+                                           value={product.quantity}
+                                           onChange={(e) =>
+                                               setQuantity(
+                                                   product,
+                                                   parseInt(e.target.value)
+                                               )
+                                           }
+                                    />
                                 </div>
 
                                 <img className='img-cart' src={product.image} alt={product.name}/>
@@ -69,8 +81,6 @@ export default function Cart({cart, setCart}) {
                             </div>
                         ))}
                     </div>
-
-
                 </div>
             </div>
         </>

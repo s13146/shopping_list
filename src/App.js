@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import {Route, Routes, BrowserRouter, Link} from 'react-router-dom';
 import './index.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faChevronRight, faChevronLeft, faCircle, faCheckCircle, faPlus} from '@fortawesome/free-solid-svg-icons';
@@ -31,26 +31,21 @@ function App(item, items) {
     };
     return (
 
-    <div className='window'>
-        <BrowserRouter>
-            <Routes>
-                <Route path="/about" exact element={<About/>}/>
-                <Route path="/contact" exact element={<Contact/>}/>
-
-            </Routes>
-            </BrowserRouter>
-
+        <div className='window'>
+                <Routes>
+                    <Route path="/about" exact element={<About/>}/>
+                    <Route path="/contact" exact element={<Contact/>}/>
+                </Routes>
             <Header/>
-        <div className='elements'>
-            <Product cart={cart} setCart={setCart}/>
-            <Cart cart={cart} setCart={setCart}/>
-            <List/>
-
+            <div className='elements'>
+                <Product cart={cart} setCart={setCart}/>
+                <Cart cart={cart} setCart={setCart}/>
+                <List/>
+            </div>
+            <Footer/>
         </div>
-        <Footer/>
-    </div>
-)
-    ;
+    )
+        ;
 };
 
 export default App;

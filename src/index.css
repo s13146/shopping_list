@@ -23,9 +23,11 @@ body {
 }
 
 .header {
+    padding: 5px;
     text-align: center;
     font-weight: bold;
     color: #ec645b;
+
 font-size: larger}
 
 .window {
@@ -42,6 +44,7 @@ p {
     color: #ec645b;
     font-size: 20px;
     text-align: center;
+    text-decoration: none;
 }
 .p-about {
     font-weight: normal;
@@ -244,4 +247,12 @@ span {
 }
 select {
     border-color: transparent;
+}
+.link {
+    text-decoration: none;
+    display: flex;
+    justify-content: space-evenly;
+}
+a {
+    text-decoration: none;
 }

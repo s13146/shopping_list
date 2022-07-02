@@ -103,7 +103,7 @@ export default function List(props) {
                            className='add-item-input' placeholder='Podaj cene...'/>
                 </div>
                 <button className='button-white' onClick={() => handleAddButtonClick()}>
-                    <FontAwesomeIcon icon={faBasketShopping} />
+                    <FontAwesomeIcon icon={faBasketShopping}/>
                     <p>Dodaj na listę</p></button>
                 <div className='item-list'>
                     {items.map((item, index) => (
@@ -128,7 +128,7 @@ export default function List(props) {
                                     </button>
                                     <span> {item.quantity} </span>
                                     <button className='click-old'><FontAwesomeIcon icon={faChevronRight}
-                                                                                    onClick={() => handleQuantityIncrease(index)}/>
+                                                                                   onClick={() => handleQuantityIncrease(index)}/>
                                     </button>
                                 </div>
                                 <div className='quantity'>
@@ -143,7 +143,7 @@ export default function List(props) {
                             </>
                         </div>))}
                 </div>
-                <div className='total'>Ilość produktów: {totalItemCount} szt </div>
+                <div className='total'>Ilość produktów: {totalItemCount} szt</div>
                 <div className='total'>Wartość produktów: {totalItemCountPrice} zł</div>
             </div>
         </div>);
