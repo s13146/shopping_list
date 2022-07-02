@@ -48,6 +48,8 @@ export default function Cart({cart, setCart}) {
                     <h2>Wybrane produkty</h2>
                     <div className="item-list">
                         <button className="button-white" onClick={() => sortByQuantity()}>Sortuj według ilości</button>
+                        <button className="button-white" onClick={() => clearCart()}>Wyczyść koszyk</button>
+
                         <div className='item-container'> Wartość produktów: {getTotalSum()} zł</div>
 
                         {cart.map((product, idx) => (
