@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import './index.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faChevronRight, faChevronLeft, faCircle, faCheckCircle, faPlus} from '@fortawesome/free-solid-svg-icons';
@@ -8,9 +9,13 @@ import Footer from "./components/Footer";
 import data from './data';
 import Product from "./components/Product";
 import Cart from "./components/Cart";
+import About from "./components/About";
+import Contact from "./components/Contact";
+
 const PAGE_PRODUCTS = 'products';
 const PAGE_CART = 'cart';
-function App  (item, items){
+
+function App(item, items) {
     //const {newItem} = props;
     const [cart, setCart] = useState([]);
     const [page, setPage] = useState(PAGE_PRODUCTS);
@@ -21,22 +26,32 @@ function App  (item, items){
 
     const getCartTotal = () => {
         return cart.reduce(
-            (sum, { quantity }) => sum + quantity,
+            (sum, {quantity}) => sum + quantity,
             0
         );
     };
     return (
-        <div className='window'>
-            <Header></Header>
-                <div className='elements'>
-                    <Product cart={cart} setCart={setCart} />
-                    <List/>
-                    <Cart cart={cart} setCart={setCart} />
-                </div>
+
+    <div className='window'>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/about" exact element={<About/>}/>
+                <Route path="/contact" exact element={<Contact/>}/>
+
+            </Routes>
+            </BrowserRouter>
+
+            <Header/>
+        <div className='elements'>
+            <Product cart={cart} setCart={setCart}/>
+            <Cart cart={cart} setCart={setCart}/>
+            <List/>
 
         </div>
-    )
-        ;
+
+    </div>
+)
+    ;
 };
 
 export default App;

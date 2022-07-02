@@ -8,4 +8,4 @@ export default function Header(props) {
 
 
 return <div className='header'>
-    <p>Lista zakupów</p></div> ;}
+    <h1>Kreator listy zakupów</h1></div> ;}

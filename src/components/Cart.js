@@ -25,19 +25,39 @@ export default function Cart({cart, setCart}) {
             cart.filter((product) => product !== productToRemove)
         );
     };
+    function sortByQuantity() {
+        cart.sort((a, b) => (a.quantity > b.quantity ? 1 : -1));
+        setCart([...cart]);
+    }
+    const handleChange = e => {
+        const { value, checked } = e.target;
+        if (checked) {
+            // push selected value in list
+            setCart(prev => [...prev, value]);
+        } else {
+            // remove unchecked value from the list
+            setCart(prev => prev.filter(x => x !== value));
+        }
+    }
+
 
     return (
         <>
             <div className='app-background'>
                 <div className='basket-main-container'>
+                    <h2>Wybrane produkty</h2>
                     <div className="item-list">
-                        {cart.map((product, idx) => (
-                            <div className="product" key={idx}>
-                                <h3>{product.name}</h3>
-                                <h4>${product.cost}</h4>
-                                <div className='add-item-box'>
+                        <button className="button-white" onClick={() => sortByQuantity()}>Sortuj według ilości</button>
+                        <div className='item-container'> Wartość produktów: {getTotalSum()} zł</div>
 
-                                <input className= 'add-item-input' placeholder='Podaj ilość..'
+                        {cart.map((product, idx) => (
+                            <div className="product-cart" key={idx} >
+                                <h3>{product.name}</h3>
+                                <h4>Cena: {product.cost} zł</h4>
+                                <h4>Zmień ilość</h4>
+
+                                <div className='add-item-box'>
+                                <input className= 'add-item-input'
                                     value={product.quantity}
                                     onChange={(e) =>
                                         setQuantity(
@@ -47,15 +67,17 @@ export default function Cart({cart, setCart}) {
                                     }
                                 />
                                 </div>
-                                <img src={product.image} alt={product.name}/>
-                                <button className='button-white' onClick={() => removeFromCart(product)}>
+
+                                <img className='img-cart' src={product.image} alt={product.name}/>
+
+                                <button className='button' onClick={() => removeFromCart(product)}>
                                     Usuń
                                 </button>
                             </div>
                         ))}
                     </div>
 
-                    <div> Wartość: {getTotalSum()} zł</div>
+
                 </div>
             </div>
         </>

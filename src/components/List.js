@@ -1,7 +1,7 @@
 import React, {useState, useEffect, Component} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
-    faChevronRight, faChevronLeft, faCircle, faCheckCircle, faBasketShopping
+    faChevronRight, faChevronLeft, faCircle, faCheckCircle, faBasketShopping, faTrashCan
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function List(props) {
@@ -11,8 +11,8 @@ export default function List(props) {
     const [inputValue, setInputValue] = useState('');
     const [inputQuantity, setInputQuantity] = useState('');
     const [inputPrice, setInputPrice] = useState('');
-    const [totalItemCount, setTotalItemCount] = useState('');
-    const [totalItemCountPrice, setTotalItemCountPrice] = useState('');
+    const [totalItemCount, setTotalItemCount] = useState(0);
+    const [totalItemCountPrice, setTotalItemCountPrice] = useState(0);
 
     const handleAddButtonClick = () => {
 
@@ -29,8 +29,6 @@ export default function List(props) {
         calculateTotal();
         calculateTotalPrice();
     };
-
-
 
 
     const handleQuantityIncrease = (index) => {
@@ -77,64 +75,77 @@ export default function List(props) {
 
         setTotalItemCountPrice(totalItemCountPrice);
     };
+    const removeFromCart = (productToRemove) => {
+        setItems(
+            items.filter((item) => item !== productToRemove)
+        );
+        calculateTotal();
+        calculateTotalPrice();
+    };
 
 
     return (
-<div className='app-background'>
-        <div className='main-container'>
-            <div className='add-item-box'>
-                <input value={inputValue} onChange={(event) => setInputValue(event.target.value)}
-                       className='add-item-input' placeholder='Podaj produkt...'/>
+        <div className='app-background'>
+            <div className='main-container'>
+                <h2>Stwórz własną liste</h2>
+                <div className='add-item-box'>
+                    <input value={inputValue} onChange={(event) => setInputValue(event.target.value)}
+                           className='add-item-input' placeholder='Podaj produkt...'/>
+                </div>
+                <div className='add-item-box'>
+
+                    <input value={inputQuantity} onChange={(event) => setInputQuantity(event.target.value)}
+                           className='add-item-input' placeholder='Podaj ilość...'/>
+
+                </div>
+                <div className='add-item-box'>
+                    <input value={inputPrice} onChange={(event) => setInputPrice(event.target.value)}
+                           className='add-item-input' placeholder='Podaj cene...'/>
+                </div>
+                <button className='button-white' onClick={() => handleAddButtonClick()}>
+                    <FontAwesomeIcon icon={faBasketShopping} />
+                    <p>Dodaj na listę</p></button>
+                <div className='item-list'>
+                    {items.map((item, index) => (
+                        <div className='item-container'>
+
+                            <>
+                                <div className='item-name' onClick={() => toggleComplete(index)}>
+                                    {item.isSelected ? (<>
+                                        <FontAwesomeIcon icon={faCheckCircle}/>
+                                        <span className='completed'>{item.itemName}</span>
+                                    </>) : (<>
+                                        <FontAwesomeIcon icon={faCircle}/>
+                                        <span>{item.itemName}</span>
+                                    </>)}
+                                </div>
+
+                                <div className='quantity'>
+
+                                    <button className='click-old'>
+                                        <FontAwesomeIcon icon={faChevronLeft}
+                                                         onClick={() => handleQuantityDecrease(index)}/>
+                                    </button>
+                                    <span> {item.quantity} </span>
+                                    <button className='click-old'><FontAwesomeIcon icon={faChevronRight}
+                                                                                    onClick={() => handleQuantityIncrease(index)}/>
+                                    </button>
+                                </div>
+                                <div className='quantity'>
+                                    <span></span>
+                                    <span> {item.price} zł</span>
+                                    <span></span>
+                                </div>
+                                <button className='button-white' onClick={() => removeFromCart(item)}>
+                                    <FontAwesomeIcon icon={faTrashCan}/>
+
+                                </button>
+                            </>
+                        </div>))}
+                </div>
+                <div className='total'>Ilość produktów: {totalItemCount} szt </div>
+                <div className='total'>Wartość produktów: {totalItemCountPrice} zł</div>
             </div>
-            <div className='add-item-box'>
-
-                <input value={inputQuantity} onChange={(event) => setInputQuantity(event.target.value)}
-                       className='add-item-input' placeholder='Podaj ilość...'/>
-
-            </div>
-            <div className='add-item-box'>
-                <input value={inputPrice} onChange={(event) => setInputPrice(event.target.value)}
-                       className='add-item-input' placeholder='Podaj cene...'/>
-            </div>
-            <FontAwesomeIcon icon={faBasketShopping} onClick={() => handleAddButtonClick()}/>
-
-            <div className='item-list'>
-                {items.map((item,index) => (
-                    <div className='item-container'>
-
-                    <>
-                        <div className='item-name' onClick={() => toggleComplete(index)}>
-                            {item.isSelected ? (<>
-                                <FontAwesomeIcon icon={faCheckCircle}/>
-                                <span className='completed'>{item.itemName}</span>
-                            </>) : (<>
-                                <FontAwesomeIcon icon={faCircle}/>
-                                <span>{item.itemName}</span>
-                            </>)}
-                        </div>
-                        <div className='quantity'>
-                            <span></span>
-                            <span> {item.price}</span>
-                            <span></span>
-                        </div>
-                        <div className='quantity'>
-
-                            <button>
-                                <FontAwesomeIcon icon={faChevronLeft}
-                                                 onClick={() => handleQuantityDecrease(index)}/>
-                            </button>
-                            <span> {item.quantity} </span>
-                            <button>
-                                <FontAwesomeIcon icon={faChevronRight}
-                                                 onClick={() => handleQuantityIncrease(index)}/>
-                            </button>
-                        </div>
-                    </>
-                    </div>))}
-            </div>
-            <div className='total'>Ilość produktów: {totalItemCount}</div>
-            <div className='total'>Wartość produktów: {totalItemCountPrice}</div>
-        </div>
         </div>);
 };
 
