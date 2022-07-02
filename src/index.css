@@ -39,7 +39,6 @@ h3, h4 {
 }
 
 p {
-    font-weight: bold;
     color: #ec645b;
     font-size: 20px;
 }
@@ -201,6 +200,7 @@ input:focus {
     padding: 5px;
     box-shadow: 10px 10px 26px 0px rgba(0, 0, 0, 0.35);
     color: #ec645b;
+    font-size: 14px;
 
 }
 .click-old {
@@ -237,4 +237,10 @@ button:hover, button-old:focus {
 .img-cart {
     width: 50%;
     margin: 0 auto;
+}
+span {
+    padding: 3px;
+}
+select {
+    border-color: transparent;
 }

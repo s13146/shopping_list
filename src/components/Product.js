@@ -140,7 +140,7 @@ export default function Products({setCart, cart}) {
                         </select>
                     </div>
                     <div className='item-container'>
-                        <button className="button-white " onClick={() => sortByPrice()}>Sortuj cena </button>
+                        <button className="button-white " onClick={() => sortByPrice()}>Sortuj wg ceny</button>
                         <button className="button-white " onClick={() => sortByTitle()}>Sortuj alfabetycznie</button>
                         <button className="button-white " onClick={() => shuffle()}>Sortuj randomowo</button>
                     </div>
