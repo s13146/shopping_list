@@ -112,16 +112,11 @@ export default function Products({setCart, cart}) {
     function sortByTitle() {
         products.sort((a, b) => (a.name > b.name ? 1 : -1));
         setCart([...cart]);
-        console.log('tytul');
-
     }
 
     function sortByPrice() {
-        console.log('prod');
         products.sort((a, b) => (a.cost > b.cost ? 1 : -1));
-        console.log(products);
         setCart([...cart]);
-
     }
 
     function shuffle() {
