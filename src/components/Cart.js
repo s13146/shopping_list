@@ -29,16 +29,7 @@ export default function Cart({cart, setCart}) {
         cart.sort((a, b) => (a.quantity > b.quantity ? 1 : -1));
         setCart([...cart]);
     }
-    const handleChange = e => {
-        const { value, checked } = e.target;
-        if (checked) {
-            // push selected value in list
-            setCart(prev => [...prev, value]);
-        } else {
-            // remove unchecked value from the list
-            setCart(prev => prev.filter(x => x !== value));
-        }
-    }
+
 
 
     return (
